@@ -1,0 +1,2 @@
+- The plugin Help uses MySQL to get it's content. Help should better be included in the plugin config-files, so help is bound to the available plugins.
+-

@@ -1,0 +1,7 @@
+- Create a new mysql database
+- Apply SQL/initial.sql
+- Make sure your IRC nick is registered with NickServ
+- Change username "root" to your IRC nick.
+- Set mysql login data at config/ircbot.conf
+- Make sure logs/ is writable by the user who's running Nimda.
+- Apply all .sql files in SQL/plugins/ that you want to use.

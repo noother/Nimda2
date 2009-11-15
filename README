@@ -1,0 +1,12 @@
+Nimda - An advanced event-driven IRC Bot written in PHP with a nice plugin system
+
+---------
+Author: noother
+E-Mail: noothy@gmail.com
+XMPP:   noother@jabber.ccc.de
+IRC:    #nimda @ irc.freenode.net
+---------
+
+Sorry, there's no documentation yet and the code is mostly uncommented. :(
+
+Start this with the php-cli, NOT in your webbrowser
