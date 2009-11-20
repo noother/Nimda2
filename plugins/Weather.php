@@ -26,34 +26,53 @@ class Weather extends Plugin {
 		# First get the raw XML data using Google API.		
 		# Example: http://www.google.com/ig/api?weather=paris,france&hl=fr
 		
-		if($this->info['text'] == NULL){
+		if ($this->info['text'] == NULL){
 			$this->sendOutput($this->CONFIG['usage']);
+			return;
 		}
-		else{
+		
+		$url    = "http://www.google.com/ig/api?weather=".urlencode($this->info['text'])."&hl=".$this->CONFIG['language'];
 			
-			$url    = "http://www.google.com/ig/api?weather=".urlencode($this->info['text'])."&hl=".$this->CONFIG['language'];
-			echo "\n".$url."\n";
-			echo "\n".var_dump($this->info)."\n";
-			$file = file_get_contents($url);
-			$file = utf8_encode($file);
-			$xml = simplexml_load_string($file);
-			
-			$temp = $xml->weather->forecast_information->city;
-			if($temp)
-			{
-				$location = $temp->attributes()->data;
-				$condition = $xml->weather->current_conditions->condition->attributes()->data;
-				$temp_c = $xml->weather->current_conditions->temp_c->attributes()->data;
-				$humidity = $xml->weather->current_conditions->humidity->attributes()->data;
-			
-				$this->sendOutput("Wetter in ".$location.": ".$condition.", ".$temp_c."°C, ".$humidity);
-			}
+		$file = file_get_contents($url);
+		$file = utf8_encode($file);
+		$xml = simplexml_load_string($file);
+		
+		$temp = $xml->weather->forecast_information->city;
+		if($temp)
+		{
+			if($this->info['triggerUsed'] == "!weather")
+				$this->currentCondition($xml);
 			else
-			{
-				$this->sendOutput($this->CONFIG['unknown']);
-			}
+				$this->forecast($xml);
+		}
+		else
+		{
+			$this->sendOutput($this->CONFIG['unknown']);
 		}
 	}
-
+	
+	function currentCondition($xml){
+		$location = $xml->weather->forecast_information->city->attributes()->data;
+		$condition = $xml->weather->current_conditions->condition->attributes()->data;
+		$temp_c = $xml->weather->current_conditions->temp_c->attributes()->data;
+		$humidity = $xml->weather->current_conditions->humidity->attributes()->data;
+	
+		$this->sendOutput("Wetter in ".$location.": ".$condition.", ".$temp_c."°C, ".$humidity);
+	}
+	
+	function forecast($xml){
+		
+		$location = $xml->weather->forecast_information->city->attributes()->data;
+		
+		foreach ($xml->weather->forecast_conditions as $forecast_condition){
+			$condition = $forecast_condition->condition->attributes()->data;
+			$temp_c_min = $forecast_condition->low->attributes()->data;
+			$temp_c_max = $forecast_condition->high->attributes()->data;
+			$day = $forecast_condition->day_of_week->attributes()->data;
+			
+			$this->sendOutput("Wetter in ".$location." am ".$day.": ".$condition.", min.: ".$temp_c_min."°C, max.: ".$temp_c_max."°C");
+		}
+		
+	}
 }
 ?>
