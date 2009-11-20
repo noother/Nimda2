@@ -26,21 +26,29 @@ class Weather extends Plugin {
 		# First get the raw XML data using Google API.		
 		# Example: http://www.google.com/ig/api?weather=paris,france&hl=fr
 		
-		$host   = "http://www.google.com";
-                $get    = "/ig/api?weather=".urlencode($this->info['text'])."&hl=".$this->CONFIG['lang'];
-                
-		#echo "---\n";
-		#echo $host.$get."\n";
-		#echo "---\n";
+        $url    = "http://www.google.com/ig/api?weather=".urlencode($this->info['text'])."&hl=de";
 		
-		$xml = new SimpleXMLElement($host.$get, NULL, TRUE);
 		
-		$location = $xml->weather->forecast_information->city->attributes()->data;
-		$condition = $xml->weather->current_conditions->condition->attributes()->data;
-		$temp_c = $xml->weather->current_conditions->temp_c->attributes()->data;
-		$humidity = $xml->weather->current_conditions->humidity->attributes()->data;
-
-		$this->sendOutput("Wetter in ".$location.": ".$condition.", ".$temp_c."°C, ".$humidity);
+		$file = file_get_contents($url);
+		$file = utf8_encode($file);
+		
+		
+		#$xml = new SimpleXMLElement($url, NULL, TRUE);
+		$xml = simplexml_load_string($file);
+		
+		
+		$temp = $xml->weather->forecast_information->city;
+		if($temp)
+		{
+			$location = $temp->attributes()->data;
+			$condition = $xml->weather->current_conditions->condition->attributes()->data;
+			$temp_c = $xml->weather->current_conditions->temp_c->attributes()->data;
+			$humidity = $xml->weather->current_conditions->humidity->attributes()->data;
+		
+			$this->sendOutput("Wetter in ".$location.": ".$condition.", ".$temp_c."°C, ".$humidity);}
+		else{
+			$this->sendOutput($this->CONFIG['error']);
+		}
 	}
 
 }
