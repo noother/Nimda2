@@ -41,7 +41,7 @@ class Weather extends Plugin {
 		$temp = $xml->weather->forecast_information->city;
 		if($temp)
 		{
-			if($this->info['triggerUsed'] == "!weather")
+			if($this->info['triggerUsed'] == "!weather" || $this->info['triggerUsed'] == '!wetter')
 				$this->currentCondition($xml);
 			else
 				$this->forecast($xml);
@@ -58,7 +58,7 @@ class Weather extends Plugin {
 		$temp_c = $xml->weather->current_conditions->temp_c->attributes()->data;
 		$humidity = $xml->weather->current_conditions->humidity->attributes()->data;
 	
-		$this->sendOutput("Wetter in \x0F\x02".$location.":\x02 ".$condition.", ".$temp_c."°C, ".$humidity);
+		$this->sendOutput("Wetter in \x02".$location.":\x02 ".$condition.", ".$temp_c."°C, ".$humidity);
 	}
 	
 	function forecast($xml){
@@ -71,7 +71,7 @@ class Weather extends Plugin {
 			$temp_c_max = $forecast_condition->high->attributes()->data;
 			$day = $forecast_condition->day_of_week->attributes()->data;
 			
-			$this->sendOutput("Wetter in \x0F\x02".$location." am ".$day.":\x02 ".$condition.", min.: ".$temp_c_min."°C, max.: ".$temp_c_max."°C");
+			$this->sendOutput("Wetter in \x02".$location." am ".$day.":\x02 ".$condition.", min.: ".$temp_c_min."°C, max.: ".$temp_c_max."°C");
 		}
 		
 	}
