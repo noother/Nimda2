@@ -35,7 +35,7 @@ class Google extends Plugin {
 		
 		$result = implode($result['content'],"\n");
 		
-		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b> f.r#',$result,$arr);
+		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b>#',$result,$arr);
 		
 		$output = $link." (Results: ";
 		if(empty($arr)) $output.= "0";

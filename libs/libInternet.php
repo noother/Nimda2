@@ -28,7 +28,7 @@ class libInternet {
 		
 		$result = implode($result['content'],"\n");
 		
-		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b> f.r#',$result,$arr);
+		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b>#',$result,$arr);
 		
 		if(empty($arr)) return 0;
 	return str_replace('.','',$arr[2]);
