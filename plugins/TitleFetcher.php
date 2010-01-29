@@ -43,6 +43,8 @@ class TitleFetcher extends Plugin {
 		$title = html_entity_decode($arr[1],null,'UTF-8');
 		$title = strtr($title,array("\r" => ' ', "\n" => ' '));
 		
+		if($title == '301 Moved') return;
+		
 		$this->sendOutput($title." ( http://".$link." )");
 	}
 
