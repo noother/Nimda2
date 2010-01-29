@@ -55,6 +55,13 @@ class libString {
 	return $count;
 	}
 	
+	function getLink($string) {
+		preg_match('#(^|\s)((http://)?([a-z0-9]+\.)([a-z0-9\-]+\.)?[a-z]{2,4}(/[\w/\.\-]+[^[:punct:]]/?)?)([\s[:punct:]]|$)#i',$string,$arr);
+		if(isset($arr[2])) return $arr[2];
+		
+	return false;
+	}
+	
 }
 
 ?>
