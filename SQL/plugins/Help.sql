@@ -92,4 +92,9 @@ INSERT INTO `help` (`id`, `command`, `usage`, `text`, `category`, `level`) VALUE
 (88, 'arcade', '!arcade [nick]', 'Shows the user''s status at http://no0ther1.kicks-ass.net/arcade/', 'Games', 0),
 (89, 'trace', '!trace [nick]', 'Traces you or the specified nick. (IP & approximate location)', 'Misc', 0),
 (90, 'wcc', '!wcc [nick|rank]', 'Shows the user''s challenge status at www.wechall.net', 'Challenges', 0),
-(91, 'tv', '!tv', 'Shows the current TV program of the main German stations.', 'Misc', 0);
+(91, 'tv', '!tv', 'Shows the current TV program of the main German stations.', 'Misc', 0),
+(92, 'weather', '!weather location', 'Sends back the current weather condition in <location> (Alias: !wetter)', 'Misc', 0),
+(93, 'weatherfc', '!weatherfc location', 'Sends back the current weather forecast in <location> (Alias: !wetterbericht)', 'Misc', 0),
+(94, 'vs', '!vs term1,term2', 'Compares 2 word''s number of google results and shows a bar of it.', 'Misc', 0),
+(95, 'notes', '!notes', 'This will show you all your unread notes.', 'Misc', 0),
+(96, 'leavenote', '!leavenote nick your_note', 'This will add a note for some user. When the user joins next time, I''ll show him the note you left him.', 'Misc', 0);
