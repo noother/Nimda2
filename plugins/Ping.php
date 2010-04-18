@@ -6,7 +6,7 @@ class Ping extends Plugin {
 		
 		switch($this->info['triggerUsed']) {
 			case '!pong':
-				$this->sendOutput('Ping!');
+				$this->sendOutput('Ping?');
 				break;
 			case '!pang':
 				$this->sendOutput('Peng!');
