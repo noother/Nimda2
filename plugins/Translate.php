@@ -30,9 +30,19 @@ class Translate extends Plugin {
 		$tmp = explode("-",$trigger);
 		$sl = $tmp[0];
 		$tl = $tmp[1];
-		$text = utf8_decode($this->info['text']);
 		
-		$translation = utf8_encode($this->unhtmlentities(libInternet::googleTranslate($text, $sl, $tl)));
+		$translation = libInternet::googleTranslate($this->info['text'], $sl, $tl);
+		
+		$translation = preg_replace_callback(
+			'/\\\u([0-9a-f]{4})/',
+			create_function(
+				'$m',
+				'return chr(hexdec($m[1]));'
+			),
+			$translation
+		);
+		$translation = $this->unhtmlentities($translation);
+		
 		$this->sendOutput("\x02Translation: \x02".$translation);
 	}
 	
@@ -45,6 +55,6 @@ class Translate extends Plugin {
 		$trans_tbl = array_flip($trans_tbl);
 		return strtr($string, $trans_tbl);
 	}
+	
 }
-
 ?>

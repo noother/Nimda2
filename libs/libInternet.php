@@ -46,7 +46,7 @@ class libInternet {
 		$sGet  = '/ajax/services/language/translate?v=1.0&q='.rawurlencode($sText).'&langpair='.rawurlencode($sFrom.'|'.$sTo);
 		
 		$result = libHTTP::GET($sHost, $sGet);
-		preg_match("/{\"translatedText\":\"(.*?)\"}/i", $result['content'][0], $aMatches);
+		preg_match('/{"translatedText":"(.*?)"}/i', $result['content'][0], $aMatches);
 
 		if (empty($aMatches)) return 'error';
 		return $aMatches[1];

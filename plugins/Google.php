@@ -28,6 +28,8 @@ class Google extends Plugin {
 			return;
 		}
 		
+		$link   = "http://www.google.com/search?q=".urlencode($this->info['text'])."&hl=".$this->CONFIG['lang']."&safe=off";
+		
 		$results = libInternet::googleResults($this->info['text']);
 		
 		$output = $link." (Results: ";
