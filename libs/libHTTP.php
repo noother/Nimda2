@@ -35,7 +35,7 @@ class libHTTP {
 		$output = array();
 		$output['content'] = array();
 		
-		while($row = fgets($fp)) {
+		while(false !== $row = fgets($fp)) {
 			$row = trim($row);
 			
 			if($headersCheck && empty($row)) {
@@ -79,7 +79,7 @@ class libHTTP {
 		$headersCheck = true;
 		$output = array();
 		$output['content'] = array();
-		while($row = fgets($fp)) {
+		while(false !== $row = fgets($fp)) {
 			$row = trim($row);
 			
 			if($headersCheck && empty($row)) {
