@@ -84,8 +84,8 @@ class IRCBot{
 	}
 	
 	private function createLogFile() {
-		$filename = "logs/".date("Y-m-d_H:i:s").".log";
-		$this->logFile = fopen($filename,"w");
+		$filename = "logs/".date("Y-m-d_H-i-s").".log";
+		$this->logFile = fopen($filename, 'w');
 	}
 	
 	public function writeLog($text) {
