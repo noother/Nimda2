@@ -19,19 +19,19 @@
 */
 
 class libArray {
-	function sortByLengthASC($array) {
+	static function sortByLengthASC($array) {
 		$tempFunction = create_function('$a,$b','return strlen($a)-strlen($b);');
 		usort($array,$tempFunction);
 	return $array;
 	}
 	
-	function sortByLengthDESC($array) {
+	static function sortByLengthDESC($array) {
 		$tempFunction = create_function('$a,$b','return strlen($b)-strlen($a);');
 		usort($array,$tempFunction);
 	return $array;
 	}
 	
-	function stripslashes($array) {
+	static function stripslashes($array) {
     	$value = is_array($array) ? array_map('stripslashes', $array) : stripslashes($array);
     return $value;
 	}

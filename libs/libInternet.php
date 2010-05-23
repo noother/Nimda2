@@ -20,7 +20,7 @@ class libInternet {
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 
-	function googleResults($string) {
+	static function googleResults($string) {
 		$host   = "www.google.com";
 		$lang	= "de";
 		$get    = "/search?q=".urlencode($string)."&hl=".$lang."&safe=off";
@@ -41,7 +41,7 @@ class libInternet {
 	 * @param string $sTo language to translate to (optional)
 	 * @return string translated text
 	 */
-	function googleTranslate($sText, $sFrom='', $sTo = 'de') {
+	static function googleTranslate($sText, $sFrom='', $sTo = 'de') {
 		$sHost = 'ajax.googleapis.com';
 		$sGet  = '/ajax/services/language/translate?v=1.0&q='.rawurlencode($sText).'&langpair='.rawurlencode($sFrom.'|'.$sTo);
 		
@@ -52,7 +52,7 @@ class libInternet {
 		return $aMatches[1];
 	}
 	
-	function getTvProgram() {
+	static function getTvProgram() {
 		$host = 'www.tvtoday.de';
 		$result = array();
 		for($page=0;$page<3;$page++) {

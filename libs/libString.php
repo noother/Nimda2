@@ -20,26 +20,26 @@
 
 class libString {
 	
-	function isUTF8($string) {
+	static function isUTF8($string) {
 	
 	return (utf8_encode(utf8_decode($string)) == $string);
 	}
 	
-	function end_s($word,$number) {
+	static function end_s($word,$number) {
 		if($number == 1 || $number == -1) return $word;
 		else return $word."s";
 	}
 	
-	function capitalize($string) {
-	return strtoupper($string[0]).strtolower(substr($string,1));
+	static function capitalize($string) {
+        return strtoupper($string[0]).strtolower(substr($string,1));
 	}
 	
-	function convertUmlaute($string) {
+	static function convertUmlaute($string) {
 		$replace = array("ä" => "ae", "ö" => "oe", "ü" => "ue", "Ä" => "Ae", "Ö" => "Oe", "Ü" => "Ue");
 	return strtr($string,$replace);
 	}
 	
-	function countSmilies($string) {
+	static function countSmilies($string) {
 		$count = 0;
 		$smilies = array(	":)",":-)",":-]",":]",":(",":-(",":<",":-<",":>",":->",":[",":-[",
 							":/",":-/",":|",":-|",";)",";-)",":p",":P",":-p",":-P",";p",";-P",":D",
@@ -55,7 +55,7 @@ class libString {
 	return $count;
 	}
 	
-	function getLink($string) {
+	static function getLink($string) {
 		preg_match('#(^|\s)((http://)?([a-z0-9]+\.)([a-z0-9\-]+\.)?[a-z]{2,4}(/[\w/\.\-\?=_\&]+[^[:punct:]]/?)?)([\s[:punct:]]|$)#i',$string,$arr);
 		if(isset($arr[2])) return $arr[2];
 		

@@ -20,7 +20,7 @@
 
 class libHTTP {
 
-	function GET($host,$get,$cookie=null,$timeout=30,$port=80) {
+	static function GET($host,$get,$cookie=null,$timeout=30,$port=80) {
 		$fp     = fsockopen($host,$port,$timeout);
 		if(!$fp) return false;
 		
@@ -59,7 +59,7 @@ class libHTTP {
 	return $output;
 	}
 	
-	function POST($host,$get,$post,$cookie=null,$timeout=30,$port=80) {
+	static function POST($host,$get,$post,$cookie=null,$timeout=30,$port=80) {
 		$fp = fsockopen($host,$port,$timeout);
 		if(!$fp) return false;
 		

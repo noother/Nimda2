@@ -20,7 +20,7 @@
 
 class libTime {
 
-	function secondsToString($seconds) {
+	static function secondsToString($seconds) {
 		$minutes = (int)($seconds/60);
 		$seconds = $seconds-$minutes*60;
 		$hours   = (int)($minutes/60);

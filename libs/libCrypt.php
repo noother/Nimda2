@@ -21,7 +21,7 @@
 class libCrypt {
 
 
-	function rot($string,$key) {
+	static function rot($string,$key) {
 		$newstring = "";
 		for($x=0;$x<strlen($string);$x++) {
 			$chr = $string{$x};
@@ -41,7 +41,7 @@ class libCrypt {
 	return $newstring;
 	}
 	
-	function vigenere_dec($string,$key) {
+	static function vigenere_dec($string,$key) {
 		$output = "";
 		$key = strtolower($key);
 		$key_pos = 0;

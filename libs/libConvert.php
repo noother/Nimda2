@@ -20,7 +20,7 @@
 
 class libConvert {
 
-	function asc2dec($string) {
+	static function asc2dec($string) {
 		if(!$string) return false;
 		$output = "";
 		for($x=0;$x<strlen($string);$x++) {
@@ -29,12 +29,12 @@ class libConvert {
 	return substr($output,0,-1);
 	}
 	
-	function asc2bin($string) { return self::dec2bin(self::asc2dec($string)); }
-	function asc2hex($string) { return self::dec2hex(self::asc2dec($string)); }
-	function asc2oct($string) { return self::dec2oct(self::asc2dec($string)); }
+	static function asc2bin($string) { return self::dec2bin(self::asc2dec($string)); }
+	static function asc2hex($string) { return self::dec2hex(self::asc2dec($string)); }
+	static function asc2oct($string) { return self::dec2oct(self::asc2dec($string)); }
 	
 	
-	function bin2dec($string) {
+	static function bin2dec($string) {
 		if(!$string) return false;
 		$tmp = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^01 ]/",$tmp)) return false;
@@ -51,12 +51,12 @@ class libConvert {
 	return substr($output,0,-1);
 	}
 	
-	function bin2asc($string) { return self::dec2asc(self::bin2dec($string)); }
-	function bin2hex($string) { return self::dec2hex(self::bin2dec($string)); }
-	function bin2oct($string) { return self::dec2oct(self::bin2dec($string)); }
+	static function bin2asc($string) { return self::dec2asc(self::bin2dec($string)); }
+	static function bin2hex($string) { return self::dec2hex(self::bin2dec($string)); }
+	static function bin2oct($string) { return self::dec2oct(self::bin2dec($string)); }
 	
 	
-	function dec2asc($string) {
+	static function dec2asc($string) {
 		if(!$string) return false;
 		$tmp    = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^0-9 ]/",$tmp)) return false;
@@ -69,7 +69,7 @@ class libConvert {
 	}
 	
 	
-	function dec2bin($string) {
+	static function dec2bin($string) {
 		if(!$string) return false;
 		$tmp    = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^0-9 ]/",$tmp)) return false;
@@ -84,7 +84,7 @@ class libConvert {
 	}
 	
 	
-	function dec2hex($string) {
+	static function dec2hex($string) {
 		if(!$string) return false;
 		$tmp    = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^0-9 ]/",$tmp)) return false;
@@ -99,7 +99,7 @@ class libConvert {
 	}
 	
 	
-	function dec2oct($string) {
+	static function dec2oct($string) {
 		if(!$string) return false;
 		$tmp = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^0-9 ]/",$tmp)) return false;
@@ -112,7 +112,7 @@ class libConvert {
 	}
 	
 	
-	function hex2dec($string) {
+	static function hex2dec($string) {
 		if(!$string) return false;
 		$tmp = preg_replace('/\s+/',' ',$string);
 		$tmp = str_replace('%','',$tmp);
@@ -130,12 +130,12 @@ class libConvert {
 	return substr($output,0,-1);
 	}
 	
-	function hex2asc($string) { return self::dec2asc(self::hex2dec($string)); }
-	function hex2bin($string) { return self::dec2bin(self::hex2dec($string)); }
-	function hex2oct($string) { return self::dec2oct(self::hex2dec($string)); }
+	static function hex2asc($string) { return self::dec2asc(self::hex2dec($string)); }
+	static function hex2bin($string) { return self::dec2bin(self::hex2dec($string)); }
+	static function hex2oct($string) { return self::dec2oct(self::hex2dec($string)); }
 	
 	
-	function oct2dec($string) {
+	static function oct2dec($string) {
 		if(!$string) return false;
 		$tmp = preg_replace('/\s+/',' ',$string);
 		if(preg_match("/[^0-7 ]/",$tmp)) return false;
@@ -147,9 +147,9 @@ class libConvert {
 	return substr($output,0,-1);
 	}
 	
-	function oct2asc($string) { return self::dec2asc(self::oct2dec($string)); }
-	function oct2bin($string) { return self::dec2bin(self::oct2dec($string)); }
-	function oct2hex($string) { return self::dec2hex(self::oct2dec($string)); }
+	static function oct2asc($string) { return self::dec2asc(self::oct2dec($string)); }
+	static function oct2bin($string) { return self::dec2bin(self::oct2dec($string)); }
+	static function oct2hex($string) { return self::dec2hex(self::oct2dec($string)); }
 
 }
 
