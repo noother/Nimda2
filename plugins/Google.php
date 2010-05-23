@@ -30,7 +30,7 @@ class Google extends Plugin {
 		
 		$link   = "http://www.google.com/search?q=".urlencode($this->info['text'])."&hl=".$this->CONFIG['lang']."&safe=off";
 		
-		$results = libInternet::googleResults($this->info['text']);
+		$results = number_format(libInternet::googleResults($this->info['text']),0,',','.');
 		
 		$output = $link." (Results: ";
 		if(!$results) $output.= "0";
