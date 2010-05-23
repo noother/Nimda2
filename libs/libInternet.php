@@ -28,10 +28,10 @@ class libInternet {
 		
 		$result = implode($result['content'],"\n");
 		
-		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b>#',$result,$arr);
+		preg_match('#Ungef.hr (.*?) Ergebnisse#',$result,$arr);
 		
 		if(empty($arr)) return 0;
-	return str_replace('.','',$arr[2]);
+	return str_replace('.','',$arr[1]);
 	}
 	
 	function getTvProgram() {

@@ -35,12 +35,12 @@ class Google extends Plugin {
 		
 		$result = implode($result['content'],"\n");
 		
-		preg_match('#Ergebnisse <b>1</b> - <b>\d{1,2}</b> von (ungef.hr )?<b>(.*?)</b>#',$result,$arr);
+		preg_match('#Ungef.hr (.*?) Ergebnisse#',$result,$arr);
 		
 		$output = $link." (Results: ";
 		if(empty($arr)) $output.= "0";
-		elseif(!empty($arr[1])) $output.= "~ ";
-		$output.= $arr[2].")";
+		elseif(!empty($arr[0])) $output.= "~ ";
+		$output.= $arr[1].")";
 		
 		$this->sendOutput($output);
 		

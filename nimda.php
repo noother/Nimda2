@@ -23,7 +23,7 @@
 
 require_once("classes/IRCBot.php");
 
-	$Nimda = new IRCBot("Nimda", "Nimda", "0", "noother's Bot");
+	$Nimda = new IRCBot("Nimda_test", "Nimda", "0", "noother's Bot");
 	$Nimda->connect("irc.freenode.net");
 	$Nimda->login();
 	
