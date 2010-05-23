@@ -2,7 +2,7 @@
 
 /*
 	This file is part of Nimda - An advanced event-driven IRC Bot written in PHP with a nice plugin system
-	Copyright (C) 2009  noother [noothy@gmail.com]
+	Copyright (C) 2010  noother [noothy@gmail.com]
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -28,25 +28,14 @@ class Google extends Plugin {
 			return;
 		}
 		
-		$host   = "www.google.com";
-		$get    = "/search?q=".urlencode($this->info['text'])."&hl=".$this->CONFIG['lang']."&safe=off";
-		$link   = "http://".$host.$get;
-		$result = libHTTP::GET($host,$get);
-		
-		$result = implode($result['content'],"\n");
-		
-		preg_match('#Ungef.hr (.*?) Ergebnisse#',$result,$arr);
+		$results = libInternet::googleResults($this->info['text']);
 		
 		$output = $link." (Results: ";
-		if(empty($arr)) $output.= "0";
-		elseif(!empty($arr[0])) $output.= "~ ";
-		$output.= $arr[1].")";
+		if(!$results) $output.= "0";
+		else $output.= "~ ";
+		$output.= $results.")";
 		
 		$this->sendOutput($output);
-		
-		
-		
-		
 		
 	}
 
