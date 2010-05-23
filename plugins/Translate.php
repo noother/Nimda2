@@ -32,26 +32,18 @@ class Translate extends Plugin {
 		$tl = $tmp[1];
 		$text = utf8_decode($this->info['text']);
 		
-		$translation = utf8_encode($this->unhtmlentities($this->getTranslation($text,$sl,$tl)));
+		$translation = utf8_encode($this->unhtmlentities(libInternet::googleTranslate($text, $sl, $tl)));
 		$this->sendOutput("\x02Translation: \x02".$translation);
 	}
 	
-	function getTranslation($text,$from,$to) {
-		$post_data = "text=".urlencode($text)."&sl=".$from."&tl=".$to;
-		$res = libHTTP::POST("translate.google.com","/translate_t?",$post_data);
-		preg_match('#<div id=result_box dir="ltr">(.*?)</div>#',$res['raw'],$arr);
-	return $arr[1];
-	}
-	
-	function unhtmlentities($string)
-	{
-	// replace numeric entities
-	$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
-	$string = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $string);
-	// replace literal entities
-	$trans_tbl = get_html_translation_table(HTML_ENTITIES);
-	$trans_tbl = array_flip($trans_tbl);
-	return strtr($string, $trans_tbl);
+	function unhtmlentities($string) {
+		// replace numeric entities
+		$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
+		$string = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $string);
+		// replace literal entities
+		$trans_tbl = get_html_translation_table(HTML_ENTITIES);
+		$trans_tbl = array_flip($trans_tbl);
+		return strtr($string, $trans_tbl);
 	}
 }
 

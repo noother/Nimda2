@@ -34,6 +34,24 @@ class libInternet {
 	return str_replace('.','',$arr[1]);
 	}
 	
+	/**
+	 * translate with the google translate API
+	 * @param string $sText text to translate
+	 * @param string $sFrom original language (optional)
+	 * @param string $sTo language to translate to (optional)
+	 * @return string translated text
+	 */
+	function googleTranslate($sText, $sFrom='', $sTo = 'de') {
+		$sHost = 'ajax.googleapis.com';
+		$sGet  = '/ajax/services/language/translate?v=1.0&q='.rawurlencode($sText).'&langpair='.rawurlencode($sFrom.'|'.$sTo);
+		
+		$result = libHTTP::GET($sHost, $sGet);
+		preg_match("/{\"translatedText\":\"(.*?)\"}/i", $result['content'][0], $aMatches);
+
+		if (empty($aMatches)) return 'error';
+		return $aMatches[1];
+	}
+	
 	function getTvProgram() {
 		$host = 'www.tvtoday.de';
 		$result = array();
