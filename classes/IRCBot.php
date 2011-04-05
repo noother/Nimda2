@@ -411,8 +411,19 @@ class IRCBot{
 		if($this->sleep) usleep(200000);
 	}
 	
-	function sendPrivmsg($target, $text) {
+	function sendPrivmsg($target, $text, $checkcontrolchars=true) {
+		if($checkcontrolchars) {
+			for($x=0;$x<strlen($text);$x++) {
+				if(in_array(ord($text{$x}), array(1, 10, 13))) {
+					echo "INFO: Dropped bad message\n";
+					return false;
+				}
+			}
+		}
+		
 		$this->sendRawMessage("PRIVMSG ".$target." :".$text);
+		
+	return true;
 	}
 	
 	function sendNotice($target, $text) {
@@ -428,7 +439,7 @@ class IRCBot{
 	}
 	
 	function sendCtcp($target, $text) {
-		$this->sendPrivmsg($target,"\x01".$text."\x01");
+		$this->sendPrivmsg($target, "\x01".$text."\x01", false);
 	}
 	
 	function answerCtcp($nick, $text) {
