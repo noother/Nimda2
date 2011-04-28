@@ -62,6 +62,12 @@ class libString {
 	return false;
 	}
 	
+	static function softhyphe($string) {
+		$pos = rand(1,strlen($string)-1);
+		$newstring = substr($string,0,$pos)."\xC2\xAD".substr($string,$pos);
+	return $newstring;
+	}
+	
 }
 
 ?>

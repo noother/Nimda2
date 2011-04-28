@@ -186,7 +186,7 @@ class Stats extends Plugin {
 		
 		$res = $this->MySQL->sendQuery($sql);
 		foreach($res['result'] as $data) {
-			$output.= $data['nick']." (".$data['number']."), ";
+			$output.= libString::softhyphe($data['nick'])." (".$data['number']."), ";
 		}
 		$output = substr($output,0,-2);
 		
